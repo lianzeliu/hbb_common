@@ -2125,10 +2125,9 @@ impl LocalConfig {
                 config.store();
             }
             if !config.options.contains_key("enable-check-update") {
-        config.options.insert("enable-check-update".to_string(), "N".to_string());
-        store = true;
+            config.options.insert("enable-check-update".to_string(), "N".to_string());
+            store = true;
         }
-        config
         config.kb_layout_type = kb_layout_type;
         config.store();
     }
